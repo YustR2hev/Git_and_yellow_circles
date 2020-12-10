@@ -1,20 +1,17 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QPointF
 from PyQt5.QtGui import QPainter, QColor
+from UI import Ui_Form
 import random
 
 
-class MainForm(QMainWindow):
+class MainForm(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
-        self.setGeometry(300, 300, 640, 480)
-        self.setWindowTitle('Git и случайные окружности')
+        self.setupUi(self)
         self.is_draw = False
 
-        self.pushButton = QPushButton('Кнопка', self)
-        self.pushButton.resize(101, 61)
-        self.pushButton.move(250, 380)
         self.pushButton.clicked.connect(self.paint)
 
     def paint(self):
@@ -31,7 +28,8 @@ class MainForm(QMainWindow):
     def draw(self, qp):
         num = random.randint(1, 150)
         qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
-        qp.drawEllipse(QPointF(300, 200), num, num)
+        qp.drawEllipse(QPointF(300, 150), num, num)
+
 
 
 if __name__ == '__main__':
